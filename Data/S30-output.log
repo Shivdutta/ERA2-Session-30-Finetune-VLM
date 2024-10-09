@@ -1,0 +1,821 @@
+['http://images.cocodataset.org/train2017/000000033471.jpg', 'What are the colors of the bus in the image? [QA]', 'The bus in the image is white and red.<|endoftext|>']
+`low_cpu_mem_usage` was None, now set to True since model is quantized.
+trainable params: 31,457,280 || all params: 2,811,141,120 || trainable%: 1.1190
+PEFT MODEL:31457280
+PROJECTION MODEL:1968640
+CLIP MODEL:0
+PHI MODEL:31457280
+RESNET MODEL:13117440
+PeftModelForCausalLM(
+  (base_model): LoraModel(
+    (model): PhiForCausalLM(
+      (model): PhiModel(
+        (embed_tokens): Embedding(51200, 2560)
+        (embed_dropout): Dropout(p=0.0, inplace=False)
+        (layers): ModuleList(
+          (0-31): 32 x PhiDecoderLayer(
+            (self_attn): PhiFlashAttention2(
+              (q_proj): lora.Linear4bit(
+                (base_layer): Linear4bit(in_features=2560, out_features=2560, bias=True)
+                (lora_dropout): ModuleDict(
+                  (default): Dropout(p=0.1, inplace=False)
+                )
+                (lora_A): ModuleDict(
+                  (default): Linear(in_features=2560, out_features=64, bias=False)
+                )
+                (lora_B): ModuleDict(
+                  (default): Linear(in_features=64, out_features=2560, bias=False)
+                )
+                (lora_embedding_A): ParameterDict()
+                (lora_embedding_B): ParameterDict()
+                (lora_magnitude_vector): ModuleDict()
+              )
+              (k_proj): lora.Linear4bit(
+                (base_layer): Linear4bit(in_features=2560, out_features=2560, bias=True)
+                (lora_dropout): ModuleDict(
+                  (default): Dropout(p=0.1, inplace=False)
+                )
+                (lora_A): ModuleDict(
+                  (default): Linear(in_features=2560, out_features=64, bias=False)
+                )
+                (lora_B): ModuleDict(
+                  (default): Linear(in_features=64, out_features=2560, bias=False)
+                )
+                (lora_embedding_A): ParameterDict()
+                (lora_embedding_B): ParameterDict()
+                (lora_magnitude_vector): ModuleDict()
+              )
+              (v_proj): lora.Linear4bit(
+                (base_layer): Linear4bit(in_features=2560, out_features=2560, bias=True)
+                (lora_dropout): ModuleDict(
+                  (default): Dropout(p=0.1, inplace=False)
+                )
+                (lora_A): ModuleDict(
+                  (default): Linear(in_features=2560, out_features=64, bias=False)
+                )
+                (lora_B): ModuleDict(
+                  (default): Linear(in_features=64, out_features=2560, bias=False)
+                )
+                (lora_embedding_A): ParameterDict()
+                (lora_embedding_B): ParameterDict()
+                (lora_magnitude_vector): ModuleDict()
+              )
+              (dense): Linear4bit(in_features=2560, out_features=2560, bias=True)
+              (rotary_emb): PhiRotaryEmbedding()
+            )
+            (mlp): PhiMLP(
+              (activation_fn): NewGELUActivation()
+              (fc1): Linear4bit(in_features=2560, out_features=10240, bias=True)
+              (fc2): Linear4bit(in_features=10240, out_features=2560, bias=True)
+            )
+            (input_layernorm): LayerNorm((2560,), eps=1e-05, elementwise_affine=True)
+            (resid_dropout): Dropout(p=0.1, inplace=False)
+          )
+        )
+        (final_layernorm): LayerNorm((2560,), eps=1e-05, elementwise_affine=True)
+        (rotary_emb): PhiRotaryEmbedding()
+      )
+      (lm_head): Linear(in_features=2560, out_features=51200, bias=True)
+    )
+  )
+)
+/tmp/ipykernel_45801/511553829.py:1: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  projection.load_state_dict(torch.load('model_chkpt/clipphi_proj.pth'))
+/tmp/ipykernel_45801/511553829.py:2: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  resblock.load_state_dict(torch.load('model_chkpt/clipphi_resblock.pth'))
+Loaded step1 checkpoint
+Starting from v4.46, the `logits` model output will have the same type as the model (except at train time, where it will always be FP32)
+Image: http://images.cocodataset.org/train2017/000000150195.jpg
+Question: What are some possible protein sources in this plate of food? [QA]
+Answer:   The main protein source in this plate of food is the fried sausage, which may be made from pork, beef, or chicken, depending on the type of sausage used.<|endoftext|>
+Model Predicted Ans: .
+Epochs:   0%|          | 0/3 [20:16<?, ?it/s]
+Epoch 1:  10%|▉         | 300/3125 [20:15<51:13,  1.09s/it]   
+Iteration 0/100000, Loss: 6.897550106048584
+Image: http://images.cocodataset.org/train2017/000000183398.jpg
+Question: What are some of the main features of the kitchen? [QA]
+Answer:   Some of the main features of the kitchen include an island bar, a kitchen sink, cupboards, a bowl of fruit, and a coffee maker.<|endoftext|>
+Model Predicted Ans:  and a. and. and. and.
+
+and. a. and a. and a. and a. and a. and a. and a. and a. and a. and a. and a. and a. and a. and a. and a. and a. and a. and a. and a. and a. and a. and a. and a. and a. and a. and a. and a. and a. and a. and
+Saving Checkpoint
+Iteration 100/100000, Loss: 4.375818252563477
+Image: http://images.cocodataset.org/train2017/000000168584.jpg
+Question: What is the young boy holding in his hand? [QA]
+Answer:   The young boy is holding a baseball glove in his hand.<|endoftext|>
+Model Predicted Ans: The young boy is holding a baseball bat and a baseball.
+Saving Checkpoint
+Iteration 200/100000, Loss: 4.179740905761719
+Image: http://images.cocodataset.org/train2017/000000008369.jpg
+Question: Can you describe the woman's hair? [QA]
+Answer:   The woman has dark hair.<|endoftext|>
+Model Predicted Ans: The woman's hair is long and flowing, and it is tied up in a ponytail.
+
+The woman's hair is tied up in a ponytail, and it is long and flowing.
+
+The woman's hair is tied up in a ponytail, and it is long and flowing.
+
+The woman's hair is tied up in a ponytail, and it is long and flowing.
+
+The woman's hair is tied up in a ponytail,
+Saving Checkpoint
+Iteration 300/100000, Loss: 4.088674068450928
+Image: http://images.cocodataset.org/train2017/000000368409.jpg
+Question: Are there other people around the woman in the image? [QA]
+Answer:   Yes, there are a couple of other people crossing the street in front of cars along with the woman.<|endoftext|>
+Model Predicted Ans: Yes, there are other people around the woman in the image.
+Saving Checkpoint
+Iteration 400/100000, Loss: 4.161954402923584
+Image: http://images.cocodataset.org/train2017/000000030566.jpg
+Question: Is the man in the furry hat smiling? [QA]
+Answer:   Yes, the young man in the furry hat is smiling.<|endoftext|>
+Model Predicted Ans: Yes, the man in the furry hat is smiling.
+Saving Checkpoint
+Iteration 500/100000, Loss: 3.9486193656921387
+Image: http://images.cocodataset.org/train2017/000000333613.jpg
+Question: What is the man wearing in the image? [QA]
+Answer:   The man is wearing a brown shirt.<|endoftext|>
+Model Predicted Ans: The man is wearing a white shirt, black pants, and a red tie.
+Saving Checkpoint
+Iteration 600/100000, Loss: 3.996349334716797
+Image: http://images.cocodataset.org/train2017/000000178026.jpg
+Question: Where are the birds perched? [QA]
+Answer:   The birds are perched on a rope that is attached to a boat.<|endoftext|>
+Model Predicted Ans: The birds are perched on a tree branch.<|endoftext|>
+{type: mathnation}
+<|question|>Student: Hey, I'm having trouble with this math problem. I need to solve for x in the equation 2x + 3 = 7.
+<|question_end|>Tutor: Sure, I'd be happy to help! Let's start by isolating x. Do you know what the first step might be?
+<|question|>Student: I think
+Saving Checkpoint
+Iteration 700/100000, Loss: 3.8585398197174072
+Image: http://images.cocodataset.org/train2017/000000178040.jpg
+Question: What are the bicyclists riding past in the image? [QA]
+Answer:   The bicyclists are riding past a series of storefronts on the sidewalk.<|endoftext|>
+Model Predicted Ans: The bicyclists are riding past a park, a street, and a park.
+Saving Checkpoint
+Iteration 800/100000, Loss: 3.9470982551574707
+Image: http://images.cocodataset.org/train2017/000000211051.jpg
+Question: What is the man's hairstyle in the image? [QA]
+Answer:   The man in the image has a shaved head.<|endoftext|>
+Model Predicted Ans: The man in the image has a short, straight, and straight hair.
+Saving Checkpoint
+Iteration 900/100000, Loss: 3.89988112449646
+Image: http://images.cocodataset.org/train2017/000000498045.jpg
+Question: What is the man standing in front of? [QA]
+Answer:   The man is standing in front of a stone or small brick wall.<|endoftext|>
+Model Predicted Ans: The man is standing in front of a hot dog stand, holding a hot dog in his hand.<|endoftext|>Illustration:
+Samantha and John are both trying to lose weight. Samantha has a supportive partner who encourages her to exercise and eat healthy, while John's partner is often critical of his weight and discourages him from making healthy choices. Samantha and John both have a busy schedule, but Samantha's partner helps her plan healthy meals and schedules workouts, while John's partner often makes excuses
+Saving Checkpoint
+Iteration 1000/100000, Loss: 3.7437472343444824
+Image: http://images.cocodataset.org/train2017/000000012241.jpg
+Question: What is the condition of the runway? [QA]
+Answer:   The runway has ice and patchy snow on it, indicating that the weather conditions are cold and potentially challenging for airplane operations.<|endoftext|>
+Model Predicted Ans: The runway is in good condition, as it is clean and well-maintained. <|endoftext|>
+
+(2). The teacher explained the concept of gravity to the students, but they still had trouble understanding it.
+<|endoftext|>
+
+(2). The teacher assigned a group project to the students, but some of them were not contributing equally. The teacher decided to assign specific tasks to each student to ensure equal participation.
+<|endoftext|>
+
+(2). The teacher assigned a group project to the
+Saving Checkpoint
+Iteration 1100/100000, Loss: 4.015828609466553
+Image: http://images.cocodataset.org/train2017/000000113326.jpg
+Question: What is the setting where the birthday cake is displayed? [QA]
+Answer:   The birthday cake is displayed in a kitchen area, which suggests that the celebration is being held at someone's home or in a casual gathering space.<|endoftext|>
+Model Predicted Ans: The cake is displayed on a table in the background of the image.<|endoftext|>
+
+## THE IMPACT OF TECHNOLOGY ON THE WORKPLACE
+
+Technology has had a profound impact on the workplace, transforming the way we work and interact with one another. From communication tools like email and video conferencing to automation and artificial intelligence, technology has made it easier for us to collaborate and get work done. However, it has also brought about new challenges and ethical considerations that we must navigate.
+Saving Checkpoint
+Iteration 1200/100000, Loss: 3.788963794708252
+Image: http://images.cocodataset.org/train2017/000000137406.jpg
+Question: Are there plates in front of the people sitting at the tables? [QA]
+Answer:   Yes, there are plates in front of the people sitting at the tables, indicating that they are having a meal.<|endoftext|>
+Model Predicted Ans: Yes, there are plates in front of the people sitting at the tables.<|endoftext|>
+
+## THE POWER OF TECHNOLOGY
+
+Technology has become an integral part of our daily lives, from the way we communicate with each other to the way we work and entertain ourselves. It has revolutionized the way we interact with the world around us, and has the power to shape our perceptions and beliefs. However, with great power comes great responsibility, and it is important to be aware of the potential pitfalls
+Saving Checkpoint
+Iteration 1300/100000, Loss: 3.843018054962158
+Image: http://images.cocodataset.org/train2017/000000018316.jpg
+Question: What are the main features found in the kitchen? [QA]
+Answer:   The main features found in the kitchen include an oven, sink, wooden cabinets, and a dining room table with chairs.<|endoftext|>
+Model Predicted Ans: The main features found in the kitchen are a large, modern, and well-equipped kitchen with a large, open space, a large, modern, and well-equipped kitchen with a large, open space, and a large, modern, and well-equipped kitchen with a large, open space, a large, modern, and well-equipped kitchen with a large, open space, and a large, modern, and well-equipped kitchen with a large, open space, and a large, modern
+Saving Checkpoint
+Iteration 1400/100000, Loss: 3.8198511600494385
+Image: http://images.cocodataset.org/train2017/000000165688.jpg
+Question: What is the person doing in the image? [QA]
+Answer:   The person in the image is entering the ocean while holding a surfboard, preparing to surf on the waves.<|endoftext|>
+Model Predicted Ans: The person is standing on a surfboard, with a surfboard in the background.
+Saving Checkpoint
+Iteration 1500/100000, Loss: 3.741121292114258
+Image: http://images.cocodataset.org/train2017/000000268656.jpg
+Question: What are the skateboarders doing with their skateboards? [QA]
+Answer:   The skateboarders are executing tricks with their skateboards, demonstrating their skills and control.<|endoftext|>
+Model Predicted Ans: The skateboarders are performing tricks and stunts on their skateboards. <|endoftext|>
+
+(2). The company's financial statements were audited by an independent auditor to ensure accuracy and compliance with accounting standards.
+<|endoftext|>
+
+(2). The teacher explained the concept of gravity to the students, but they still had many questions.
+<|endoftext|>
+
+(2). The company's profits were higher than expected because they implemented cost-cutting measures.
+<|endoftext|>
+
+(2). The company's
+Saving Checkpoint
+Iteration 1600/100000, Loss: 3.888660430908203
+Image: http://images.cocodataset.org/train2017/000000261843.jpg
+Question: What is on the table besides food? [QA]
+Answer:   Besides food, there are glasses of wine on the table for the group to enjoy during their meal.<|endoftext|>
+Model Predicted Ans: Besides the food, there is a bottle of wine on the table. <|endoftext|>
+
+```
+
+Question 8: In a classroom, there are three students: Alice, Bob, and Carol. Alice is to the left of Bob. Bob is to the left of Carol.
+
+Solution 8:
+```python
+# Define the variables
+students = ['Alice', 'Bob', 'Carol']
+
+# Check the positions of the students
+if students.index
+Saving Checkpoint
+Iteration 1700/100000, Loss: 3.82267165184021
+Image: http://images.cocodataset.org/train2017/000000463334.jpg
+Question: How many men are sitting at the table in the image? [QA]
+Answer:   There are two men sitting at the table in the image.<|endoftext|>
+Model Predicted Ans: There are two men sitting at the table in the image.<|endoftext|>
+The teacher gave the students a test to measure their knowledge of the material. The test was difficult and required a lot of concentration.
+<|endoftext|>
+The teacher gave the students a pop quiz, but the students were not prepared.
+<|endoftext|>
+The teacher gave the students a pop quiz, because she wanted to test their knowledge.
+<|endoftext|>
+The teacher gave the students a pop quiz, because she wanted to surprise them.
+<|endoftext|>
+Saving Checkpoint
+Iteration 1800/100000, Loss: 3.6674351692199707
+Image: http://images.cocodataset.org/train2017/000000324200.jpg
+Question: How long is the sandwich on the table? [QA]
+Answer:   The sandwich is very long, around five feet in length.<|endoftext|>
+Model Predicted Ans: The sandwich is approximately 8 inches long and 4 inches wide.<|endoftext|>
+
+(2). The teacher gave the students a worksheet to complete, but some of them were confused about the instructions.
+<|endoftext|>
+The teacher gave the students a test on the first day of school. The test was difficult and many students failed.
+<|endoftext|>
+The teacher gave the students a pop quiz, but the students were not prepared.
+<|endoftext|>
+The teacher gave the students a pop quiz, because she wanted
+Saving Checkpoint
+Iteration 1900/100000, Loss: 3.5921425819396973
+Image: http://images.cocodataset.org/train2017/000000090791.jpg
+Question: What is the main feature of the building in the image? [QA]
+Answer:   The main feature of the building in the image is a clock displayed on the corner of the building or mounted on its wall.<|endoftext|>
+Model Predicted Ans: The main feature of the building in the image is the large, ornate, and intricate design of the building.  The building has a grand and elaborate design, with intricate details and decorations.  The building is a grand and ornate structure, with intricate details and decorations.  The building has a grand and ornate design, with intricate details and decorations.  The building has a grand and ornate design, with intricate details and decorations.  The building has a
+Saving Checkpoint
+Iteration 2000/100000, Loss: 3.724414348602295
+Image: http://images.cocodataset.org/train2017/000000268195.jpg
+Question: Is the computer a modern, sleek design or an older, more traditional design? [QA]
+Answer:   The computer in the image is an older, more traditional design, as indicated by the multiple sentences describing it as an old computer.<|endoftext|>
+Model Predicted Ans: The computer is a modern, sleek design.
+Saving Checkpoint
+Iteration 2100/100000, Loss: 3.7208733558654785
+Image: http://images.cocodataset.org/train2017/000000503099.jpg
+Question: What is the color of the WW2-era motorcycle in the image? [QA]
+Answer:   The WW2-era motorcycle in the image is painted grey.<|endoftext|>
+Model Predicted Ans: The motorcycle in the image is a vintage, red, and black, and it is a WWII-era motorcycle. <|endoftext|>
+
+Paragraph:<url_begin>https://en.wikipedia.org/wiki/The%20Carpenter%20and the%20Cobbler<url_end>
+
+
+Topic: Religion
+
+1. Who is the main character in the story?
+- The main character in the story is the carpenter.
+
+2.
+Saving Checkpoint
+Iteration 2200/100000, Loss: 3.6885595321655273
+Image: http://images.cocodataset.org/train2017/000000398938.jpg
+Question: Is the man holding anything or carrying any accessories? [QA]
+Answer:   Yes, the man is carrying a handbag, which can serve both as a functional item for holding personal belongings and as a fashionable accessory that complements his outfit.<|endoftext|>
+Model Predicted Ans: Yes, the man is holding a pair of scissors in his hand.<|endoftext|>
+
+## THE POWER OF TECHNOLOGY IN AGRICULTURE
+
+Agriculture has come a long way since the days of manual labor and traditional farming methods. Today, technology plays a crucial role in the industry, from precision farming to automated machinery. The power of technology in agriculture is undeniable, but it is not without its drawbacks.
+
+One of the most significant benefits of technology in agriculture is the
+Saving Checkpoint
+Iteration 2300/100000, Loss: 3.787307024002075
+Image: http://images.cocodataset.org/train2017/000000264151.jpg
+Question: In which city is the bus likely located? [QA]
+Answer:   The bus is likely located in London, as red double-decker buses are iconic and strongly associated with the streets of this city.<|endoftext|>
+Model Predicted Ans: The bus is likely located in the city of London, as the image of the bus is taken in the city of London. <|endoftext|>
+
+```
+
+Question 7: In a garden, there are three flowers: a rose, a tulip, and a daisy. The rose is to the right of the tulip. The daisy is to the left of the rose.
+
+Solution 7:
+```python
+# Define the flowers
+flowers = ["rose
+Saving Checkpoint
+Iteration 2400/100000, Loss: 3.7582833766937256
+Image: http://images.cocodataset.org/train2017/000000556835.jpg
+Question: Where is the giraffe located in this image? [QA]
+Answer:   The giraffe is located inside of a building, standing next to a tall tree and a window.<|endoftext|>
+Model Predicted Ans: The giraffe is located in a zoo, specifically in a giraffe enclosure. <|endoftext|>
+
+```
+
+Question 7: In a classroom, there are three students: Alice, Bob, and Carol. Alice is to the left of Bob. Bob is to the left of Carol.
+
+Solution 7:
+```
+# Define the variables
+students = ['Alice', 'Bob', 'Carol']
+
+# Check the positions of the students
+if students.
+Saving Checkpoint
+Iteration 2500/100000, Loss: 3.8253517150878906
+Image: http://images.cocodataset.org/train2017/000000371703.jpg
+Question: Is the person skiing or snowboarding? [QA]
+Answer:   The person is skiing, as they are using poles and riding skis on the snowy surface.<|endoftext|>
+Model Predicted Ans: The person is snowboarding.<|endoftext|>Illustration:
+Samantha and John are coworkers who have been assigned to work on a project together. Samantha is a very assertive person who likes to take charge and make decisions quickly, while John is more laid-back and prefers to go with the flow. During a meeting, Samantha suggests a new approach to the project that she believes will be more efficient. John, however, disagrees and thinks their current approach is better. Samantha insists on her idea
+Saving Checkpoint
+Iteration 2600/100000, Loss: 3.746546983718872
+Image: http://images.cocodataset.org/train2017/000000121661.jpg
+Question: What type of surface is the laptop and printer sitting on? [QA]
+Answer:   The laptop and printer are sitting on a wooden table.<|endoftext|>
+Model Predicted Ans: The laptop and printer are sitting on a desk or table.<|endoftext|>
+The fireman was able to put out the fire quickly because he had the right equipment.
+<|endoftext|>
+The fireman was able to put out the fire quickly because he had the right equipment.
+<|endoftext|>
+The fireman was able to put out the fire quickly because he had the right equipment.
+<|endoftext|>
+The fireman was able to put out the fire quickly because he had the right equipment.
+<|endoftext|>
+The fire
+Saving Checkpoint
+Iteration 2700/100000, Loss: 3.7433066368103027
+Image: http://images.cocodataset.org/train2017/000000251524.jpg
+Question: How many ripe bananas are on the table in the image? [QA]
+Answer:   There are two ripe bananas sitting on top of the table in the image.<|endoftext|>
+Model Predicted Ans: There are three ripe bananas on the table in the image.
+<|endoftext|>
+
+```
+
+Question 7: In a garden, there are three flowers: a rose, a tulip, and a daisy. The rose is to the right of the tulip. The daisy is to the left of the rose.
+
+Solution 7:
+```python
+# Define the flowers
+flowers = ["rose", "tulip", "daisy"]
+
+
+Saving Checkpoint
+Iteration 2800/100000, Loss: 3.6736717224121094
+Image: http://images.cocodataset.org/train2017/000000550482.jpg
+Question: What is the color scheme of the airplane in the image? [QA]
+Answer:   The airplane in the image has a red and white color scheme.<|endoftext|>
+Model Predicted Ans: The airplane in the image is painted in a bright orange color.<|endoftext|>
+
+(2). The company's profits increased because they implemented a new marketing strategy.
+<|endoftext|>
+The teacher gave the students a test on the first day of school. The test was easy and the students aced it.
+<|endoftext|>
+The teacher gave the students a pop quiz, because she wanted to test their knowledge.
+<|endoftext|>
+The teacher gave the students a pop quiz, because she wanted to surprise them.
+
+Saving Checkpoint
+Iteration 2900/100000, Loss: 3.7345588207244873
+Image: http://images.cocodataset.org/train2017/000000453313.jpg
+Question: Are there any other damaged objects in the image? [QA]
+Answer:   Yes, besides the parking meter, there is also a traffic light that has been ripped out of the ground and is laying on its side, as well as a street sign that has been turned on its side.<|endoftext|>
+Model Predicted Ans: Yes, there is a broken streetlight in the image. <|endoftext|>
+
+```
+
+Question 7: In a garden, there are three flowers: a rose, a tulip, and a daisy. The rose is to the right of the tulip. The daisy is to the left of the rose.
+
+Solution 7:
+```python
+# Define the objects
+flowers = ["rose", "tulip", "daisy"]
+
+#
+Saving Checkpoint
+Iteration 3000/100000, Loss: 3.698122501373291
+Image: http://images.cocodataset.org/train2017/000000240263.jpg
+Question: How would you describe the setting of the image? [QA]
+Answer:   The setting of the image is a big city with a skyline that includes very tall buildings and a large bridge. The cityscape creates an impressive and bustling urban atmosphere.<|endoftext|>
+Model Predicted Ans: The image is set in a city, specifically in a city with a train station. The train station is located in a busy urban area, with buildings and other structures surrounding it. The city is bustling with activity, with people walking and cars driving by. <|endoftext|>Illustration:
+Samantha and John are coworkers who have been assigned to work on a project together. Samantha is a very assertive person who likes to take charge and make decisions quickly, while John is more laid-back
+Saving Checkpoint
+Iteration 3100/100000, Loss: 3.669595956802368
+Image: http://images.cocodataset.org/train2017/000000360185.jpg
+Question: What types of fruit can be seen in the bowl? [QA]
+Answer:   In the bowl, there are cherries and banana slices mixed with cereal.<|endoftext|>
+Model Predicted Ans: The fruit in the bowl includes a banana, an apple, and a pear.<|endoftext|>Illustration:
+Samantha and John are both trying to lose weight. Samantha has a supportive partner who encourages her to exercise and eat healthy, while John's partner is constantly tempting him with junk food and discouraging him from exercising. As a result, Samantha is able to stick to her weight loss plan and has lost 10 pounds in the past month, while John has only lost 2 pounds and is feeling discouraged
+Saving Checkpoint
+Epoch 1 completed.
+Iteration 3200/100000, Loss: 3.7019569873809814
+Image: http://images.cocodataset.org/train2017/000000483041.jpg
+Question: What color is the building in the image? [QA]
+Answer:   The building in the image has both dark green and light green panels.<|endoftext|>
+Model Predicted Ans: The building in the image is blue.<|endoftext|>Illustration:
+Samantha and John are both trying to lose weight. Samantha has a supportive partner who encourages her to exercise and eat healthy, while John's partner is often critical of his weight and encourages him to indulge in unhealthy foods. One day, Samantha and John are both invited to a party where there will be lots of tempting snacks and desserts. Samantha's partner reminds her of her goals and encourages her to make healthy choices, while John
+Saving Checkpoint
+Iteration 3300/100000, Loss: 3.6746010780334473
+Image: http://images.cocodataset.org/train2017/000000293833.jpg
+Question: What do the horses look like? [QA]
+Answer:   The horses appear lean, which might be indicative of the challenging living conditions the Native Americans would be facing in the barren landscape.<|endoftext|>
+Model Predicted Ans: The horses in the image are standing in a field, with one of them standing on a hill. They are wearing a saddle and a bridle, and their mane is flowing in the wind.<|endoftext|>Illustration:
+Samantha and John are both trying to improve their health by taking supplements. Samantha has been taking a multivitamin every day for a few weeks, while John has been taking a protein powder supplement. One day, Samantha notices that her skin is breaking out and her
+Saving Checkpoint
+Iteration 3400/100000, Loss: 3.7407121658325195
+Image: http://images.cocodataset.org/train2017/000000482751.jpg
+Question: What is the man who is jumping wearing? [QA]
+Answer:   The man who is jumping is wearing green shorts and is reaching out to catch a white Frisbee.<|endoftext|>
+Model Predicted Ans: The man who is jumping is wearing a white T-shirt and blue shorts.<|endoftext|>Illustration:
+Samantha and John are both trying to lose weight. Samantha has been following a strict diet and exercise routine for the past month, while John has been eating whatever he wants and rarely exercising. One day, they both go out to eat at a restaurant. Samantha orders a salad with grilled chicken and water, while John orders a burger with fries and a soda. After the meal, Samantha
+Saving Checkpoint
+Iteration 3500/100000, Loss: 3.608044385910034
+Image: http://images.cocodataset.org/train2017/000000047235.jpg
+Question: What animal is carrying the containers? [QA]
+Answer:   A horse is carrying the containers.<|endoftext|>
+Model Predicted Ans: The animal carrying the containers is a horse.<|endoftext|>Illustration:
+Samantha and John are both trying to lose weight. Samantha has a supportive partner who encourages her to make healthy choices and goes on walks with her. John, on the other hand, has a partner who constantly criticizes his efforts and discourages him from making healthy choices. As a result, Samantha is more likely to stick to her weight loss goals and make healthier choices, while John is more likely to give up and
+Saving Checkpoint
+Iteration 3600/100000, Loss: 3.7579407691955566
+Image: http://images.cocodataset.org/train2017/000000385130.jpg
+Question: What kind of animals are they? Sheep or cows? [QA]
+Answer:   The animals in the image are sheep.<|endoftext|>
+Model Predicted Ans: The animals in the image are sheep.<|endoftext|>Illustration:
+Samantha and John are coworkers who have been assigned to work on a project together. Samantha is a very assertive person who likes to take charge and make decisions quickly, while John is more laid-back and prefers to go with the flow. During a meeting, Samantha suggests a new approach to the project that she believes will be more efficient. John, however, disagrees and suggests they stick to the original plan. Samantha insists
+Saving Checkpoint
+Iteration 3700/100000, Loss: 3.6355180740356445
+Image: http://images.cocodataset.org/train2017/000000150049.jpg
+Question: What time of day is depicted in the image? [QA]
+Answer:   The image depicts a city street at night, with the street illuminated by lights and various neon signs.<|endoftext|>
+Model Predicted Ans: The image depicts a street in the evening, as the streetlights are lit up and the sun is setting in the background.<|endoftext|>Illustration:
+Samantha and John are coworkers who have been assigned to work on a project together. Samantha is a very assertive person who likes to take charge and make decisions quickly, while John is more laid-back and prefers to go with the flow. During a meeting, Samantha suggests a new approach to the project that she believes will be more efficient
+Saving Checkpoint
+Iteration 3800/100000, Loss: 3.64048171043396
+Image: http://images.cocodataset.org/train2017/000000377412.jpg
+Question: What is the woman doing in the image? [QA]
+Answer:   The woman in the image is tending a doughnut-making machine at an outdoor festival, possibly selling them to customers.<|endoftext|>
+Model Predicted Ans: The woman is holding a large, hot, and steaming pizza in her hands.<|endoftext|>
+The family was trying to decide which restaurant to go to for dinner. They chose the one with the best reviews.
+<|endoftext|>
+The teacher gave the students a test on the first day of school. The test was easy and the students aced it.
+<|endoftext|>
+The teacher gave the students a pop quiz, but the students were not prepared.
+<|endoftext|>
+The teacher gave the students a pop quiz
+Saving Checkpoint
+Iteration 3900/100000, Loss: 3.6493139266967773
+Image: http://images.cocodataset.org/train2017/000000511281.jpg
+Question: Is there a mirror in the bathroom? If so, how would you describe it? [QA]
+Answer:   Yes, there is a large mirror in the bathroom. It likely serves both functional and aesthetic purposes by visually expanding the space and providing ample reflection for grooming and daily activities.<|endoftext|>
+Model Predicted Ans: Yes, there is a mirror in the bathroom. It is a large, decorative mirror with a gold frame.<|endoftext|>
+The teacher gave the students a choice between two books to read for their assignment. The students had to choose one of the books.
+The students had to choose one of the books.
+<|endoftext|>
+The teacher gave the students a choice between two books to read for their assignment. The students had to choose one of the books.
+<|endoftext|>
+The teacher gave the students a choice
+Saving Checkpoint
+Iteration 4000/100000, Loss: 3.7566442489624023
+Image: http://images.cocodataset.org/train2017/000000194462.jpg
+Question: What is the weather like in the image? [QA]
+Answer:   The weather in the image appears to be sunny and pleasant, as there is no indication of rain or adverse conditions.<|endoftext|>
+Model Predicted Ans: The weather in the image is cold, as the image is taken in winter.<|endoftext|>
+
+## THE POWER OF TECHNOLOGY
+
+Technology has become an integral part of our daily lives, from the way we communicate with each other to the way we work and entertain ourselves. It has revolutionized the way we live, and its impact can be seen in every aspect of our society.
+
+One of the most significant ways technology has impacted our lives is through social interactions. With the rise of
+Saving Checkpoint
+Iteration 4100/100000, Loss: 3.558067798614502
+Image: http://images.cocodataset.org/train2017/000000412501.jpg
+Question: Are there any other planes in the image? [QA]
+Answer:   Yes, there are other planes behind the FedEx airplane in the image.<|endoftext|>
+Model Predicted Ans: Yes, there are other planes in the image, but they are not visible in the image.<|endoftext|>
+The teacher gave the students a test on the first day of school. The test was hard and had many questions. The students studied hard and hoped to do well. The teacher graded the tests and gave the students their scores. The students were happy or sad depending on their scores. <|endoftext|>
+The teacher gave the students a pop quiz, but the students were not prepared.
+<|endoftext|>
+The
+Saving Checkpoint
+Iteration 4200/100000, Loss: 3.7653465270996094
+Image: http://images.cocodataset.org/train2017/000000073215.jpg
+Question: What type of vehicle can be seen near the cars? [QA]
+Answer:   A train or an antique train car can be seen near the cars in the image.<|endoftext|>
+Model Predicted Ans: A bus can be seen near the cars in the image.<|endoftext|>
+The family was trying to decide which movie to watch, so they chose the one with the most positive reviews.
+<|endoftext|>
+The teacher gave the students a test on the first day of school. The test was hard and many students failed.
+<|endoftext|>
+The teacher gave the students a pop quiz, but the students were not prepared.
+<|endoftext|>
+The teacher gave the students a low grade because their essays were inadequate and full of
+Saving Checkpoint
+Iteration 4300/100000, Loss: 3.7249813079833984
+Image: http://images.cocodataset.org/train2017/000000520325.jpg
+Question: What are the people doing in the image? [QA]
+Answer:   The people are standing at a street corner near a large advertisement on the wall.<|endoftext|>
+Model Predicted Ans: The people in the image are standing in front of a bus, possibly waiting for it to arrive or getting on and off.<|endoftext|>Illustration:
+Samantha and John are coworkers who have been assigned to work on a project together. Samantha is a very assertive person who likes to take charge and make decisions quickly, while John is more laid-back and prefers to go with the flow. During a meeting, Samantha suggests a new approach to the project that she believes will be more efficient
+Saving Checkpoint
+Iteration 4400/100000, Loss: 3.7463183403015137
+Image: http://images.cocodataset.org/train2017/000000007455.jpg
+Question: What time of day does the image show? [QA]
+Answer:   The image was taken during the day.<|endoftext|>
+Model Predicted Ans: The image shows a boat in the middle of the ocean, which suggests that it is daytime or early evening.<|endoftext|>Illustration:
+Samantha and John are both trying to lose weight. Samantha has a supportive partner who encourages her to exercise and eat healthy, while John's partner is constantly tempting him with unhealthy food and discouraging him from exercising. As a result, Samantha is making progress towards her weight loss goals, while John is struggling to stay on track.
+
+Q&A:
+Saving Checkpoint
+Iteration 4500/100000, Loss: 3.6674745082855225
+Image: http://images.cocodataset.org/train2017/000000145994.jpg
+Question: What color are the traffic lights in the image? [QA]
+Answer:   The traffic lights in the image are red.<|endoftext|>
+Model Predicted Ans: The traffic lights in the image are red, yellow, and green.<|endoftext|>Illustration:
+Samantha and John are both trying to lose weight. Samantha has a supportive partner who encourages her to exercise and eat healthy, while John's partner is constantly tempting him with unhealthy snacks and discouraging him from exercising. As a result, Samantha is making progress towards her weight loss goals, while John is struggling to stay on track.
+
+Q&A:
+1. How does Samantha's partner
+Saving Checkpoint
+Iteration 4600/100000, Loss: 3.6319267749786377
+Image: http://images.cocodataset.org/train2017/000000096130.jpg
+Question: Is the desk cluttered with papers or is it well-organized? [QA]
+Answer:   The desk is cluttered with papers, which creates a disorganized appearance.<|endoftext|>
+Model Predicted Ans: The desk is cluttered with papers, as there are several papers scattered on the desk.<|endoftext|>Illustration:
+Samantha and John are coworkers who have been assigned to work on a project together. Samantha is a very outgoing and talkative person, while John is more reserved and prefers to work independently. During a meeting, Samantha suggests a new approach to the project that involves more collaboration and communication between team members. John, on the other hand, suggests that they stick to their current approach
+Saving Checkpoint
+Iteration 4700/100000, Loss: 3.625824213027954
+Image: http://images.cocodataset.org/train2017/000000429658.jpg
+Question: What is the location of the bus and the cyclist? [QA]
+Answer:   The bus and the cyclist are located on a city street, with the bus stopped at a bus stop near a building, and the man cycling past it.<|endoftext|>
+Model Predicted Ans: The bus and the cyclist are located in a city, possibly in a busy urban area.<|endoftext|>
+The family was trying to decide which restaurant to go to for dinner, and they chose the one with the best reviews.
+<|endoftext|>
+The teacher gave the students a test on the first day of school. The test was easy and the students aced it.
+<|endoftext|>
+The teacher gave the students a pop quiz, but the students were not prepared.
+<|endoftext|>
+The teacher gave the students a
+Saving Checkpoint
+Iteration 4800/100000, Loss: 3.5162997245788574
+Image: http://images.cocodataset.org/train2017/000000580651.jpg
+Question: What is the cat's position relative to the television? [QA]
+Answer:   The cat is next to the television, with its paws touching the TV screen.<|endoftext|>
+Model Predicted Ans: The cat is sitting on the couch, next to the television, and is looking directly at the screen.<|endoftext|>Illustration:
+Samantha and John are both trying to improve their health by taking vitamins. Samantha decides to take a multivitamin pill, while John chooses to take a liquid vitamin supplement. Samantha takes her pill with a glass of water, while John mixes his liquid supplement with a glass of orange juice. Both of them feel confident that they are getting the nutrients they need to
+Saving Checkpoint
+Iteration 4900/100000, Loss: 3.680293083190918
+Image: http://images.cocodataset.org/train2017/000000241806.jpg
+Question: How is the sink designed in the bathroom? [QA]
+Answer:   The sink is designed as a vessel sink, which is a type of sink that sits on top of the bathroom counter, rather than being installed below the countertop surface.<|endoftext|>
+Model Predicted Ans: The sink in the bathroom is designed to be a double sink, with two sinks side by side.<|endoftext|>Illustration:
+Samantha and John are both in the same English class. Samantha reads a lot of books in her free time, while John prefers to watch TV or play video games. One day, their teacher assigns a creative writing assignment. Samantha is excited and immediately starts brainstorming ideas, while John struggles to come up with anything. Samantha's writing is full of descriptive language and
+Saving Checkpoint
+Iteration 5000/100000, Loss: 3.4633524417877197
+Image: http://images.cocodataset.org/train2017/000000162427.jpg
+Question: What type of device does the keyboard belong to? [QA]
+Answer:   The keyboard belongs to a laptop.<|endoftext|>
+Model Predicted Ans: The keyboard belongs to a laptop or a computer.<|endoftext|>
+
+(2). The company's profits increased significantly after implementing a new marketing strategy.
+<|endoftext|>
+The teacher gave the students a test on the first day of school. The test was easy and the students aced it.
+<|endoftext|>
+The teacher gave the students a pop quiz on the first day of school. The students were surprised and nervous.
+<|endoftext|>
+The teacher gave the students a test on the first day of school. The
+Saving Checkpoint
+Iteration 5100/100000, Loss: 3.594623327255249
+Image: http://images.cocodataset.org/train2017/000000434623.jpg
+Question: How many layers does the rainbow cake have? [QA]
+Answer:   The rainbow cake has six layers.<|endoftext|>
+Model Predicted Ans: The rainbow cake has three layers.<|endoftext|>
+The family was able to find the lost dog because the family had a tracking device.
+<|endoftext|>
+The family was able to find the lost dog because the family had a tracking device.
+<|endoftext|>
+The family was able to find the lost dog because the family had a tracking device.
+<|endoftext|>
+The family was able to find the lost dog because the family had a tracking device.
+<|endoftext|>
+The family was able to find the lost dog because the
+Saving Checkpoint
+Iteration 5200/100000, Loss: 3.6885616779327393
+Image: http://images.cocodataset.org/train2017/000000000384.jpg
+Question: What pieces of furniture are prominently visible in the living room? [QA]
+Answer:   In the living room, a black couch and a coffee table are prominently visible.<|endoftext|>
+Model Predicted Ans: The living room has a large, comfortable couch and a large, wooden coffee table.<|endoftext|>Illustration:
+Samantha and John are both trying to improve their health by taking vitamins. Samantha takes a multivitamin every morning with her breakfast, while John takes a vitamin D supplement in the evening before bed. Samantha believes that taking a multivitamin is enough to meet her daily nutrient needs, while John thinks that vitamin D is important for bone health and wants to make sure he is getting
+Saving Checkpoint
+Iteration 5300/100000, Loss: 3.654592514038086
+Image: http://images.cocodataset.org/train2017/000000173644.jpg
+Question: What type of structure is in the image? [QA]
+Answer:   The image features a tall clock tower located in the middle of a park.<|endoftext|>
+Model Predicted Ans: The structure in the image is a church, specifically a tower.<|endoftext|>
+The teacher gave the students a test on the first day of school. The test was difficult and the students struggled to finish it.
+<|endoftext|>
+The teacher gave the students a test on the first day of school. The test was difficult and the students struggled to finish it.
+<|endoftext|>
+The teacher gave the students a low grade because their essays were inadequate and full of errors.
+<|endoftext|>
+The teacher gave the students a
+Saving Checkpoint
+Iteration 5400/100000, Loss: 3.6327357292175293
+Image: http://images.cocodataset.org/train2017/000000044782.jpg
+Question: Are there any people standing next to the sign? [QA]
+Answer:   Yes, there are people standing next to the sign, including a guy and a girl.<|endoftext|>
+Model Predicted Ans: Yes, there are people standing next to the sign, possibly waiting for the bus or taking a break from their journey.<|endoftext|>Illustration:
+Samantha and John are coworkers who have been assigned to work on a project together. Samantha is a very outgoing and talkative person, while John is more reserved and prefers to work independently. During a meeting, Samantha suggests a new approach to the project, but John disagrees and suggests sticking to the original plan. Samantha becomes frustrated and starts to raise
+Saving Checkpoint
+Iteration 5500/100000, Loss: 3.6506471633911133
+Image: http://images.cocodataset.org/train2017/000000122001.jpg
+Question: What is the woman doing in the image? [QA]
+Answer:   The woman in the image is working on someone's hair at a salon, most likely a professional stylist attending to a client.<|endoftext|>
+Model Predicted Ans: The woman is sitting on a chair, holding a cup of coffee, and looking at her phone.<|endoftext|>Illustration:
+Samantha and John are both trying to improve their health by taking supplements. Samantha has been taking a multivitamin every morning for the past month, while John has been taking a protein powder supplement before his workouts. One day, Samantha notices that her skin is breaking out and her hair is falling out, while John is experiencing stomach cramps and diarrhea. They both
+Saving Checkpoint
+Iteration 5600/100000, Loss: 3.675548553466797
+Image: http://images.cocodataset.org/train2017/000000479191.jpg
+Question: What food and drinks are on the tray? [QA]
+Answer:   The tray contains two slices of cake and two drinks, which are a soda and a tea, served in bottled form.<|endoftext|>
+Model Predicted Ans: The tray contains a sandwich, a glass of water, and a plate of chips.<|endoftext|>
+
+## THE POWER OF TECHNOLOGY
+
+Technology has become an integral part of our daily lives, from the way we communicate with each other to the way we work and entertain ourselves. While there are certainly drawbacks to our reliance on technology, there is no denying the power it has to improve our lives in countless ways.
+
+One of the most significant ways technology has impacted our lives is through the
+Saving Checkpoint
+Iteration 5700/100000, Loss: 3.51080584526062
+Image: http://images.cocodataset.org/train2017/000000412698.jpg
+Question: What kind of plant life is visible around the bird? [QA]
+Answer:   There are water lilies, lily pads, branches, and other types of plant life visible around the bird.<|endoftext|>
+Model Predicted Ans: The bird is standing in a field of grass, which is a type of plant life.<|endoftext|>Illustration:
+Samantha and John are both trying to lose weight. Samantha has a supportive partner who encourages her to make healthy choices and goes on walks with her. John, on the other hand, has a partner who constantly criticizes his efforts and discourages him from making healthy choices. As a result, Samantha is more likely to stick to her weight loss goals and make healthier choices,
+Saving Checkpoint
+Iteration 5800/100000, Loss: 3.5920300483703613
+Image: http://images.cocodataset.org/train2017/000000524044.jpg
+Question: Are there any unusual objects in the middle of the street? [QA]
+Answer:   Yes, there are toilets placed in the middle of the street, which is an unusual sight.<|endoftext|>
+Model Predicted Ans: Yes, there is a large, colorful, and unusual object in the middle of the street. It appears to be a large, inflatable, and colorful object, possibly a giant inflatable image or a large inflatable structure.<|endoftext|>
+The teacher gave the students a choice between a multiple-choice test or an essay test. The students preferred the multiple-choice test because it was easier.
+<|endoftext|>
+The teacher gave the students a pop quiz, which was a surprise for them.
+<|endoftext|>
+Saving Checkpoint
+Iteration 5900/100000, Loss: 3.694707155227661
+Image: http://images.cocodataset.org/train2017/000000136900.jpg
+Question: Are there any nearby landmarks or objects in the vicinity of the bus? [QA]
+Answer:   Yes, there is a statue located near the double decker bus on the city street, indicating that the bus might be in an area of cultural or historical significance.<|endoftext|>
+Model Predicted Ans: Yes, there are nearby landmarks or objects in the vicinity of the bus. The image shows a street with buildings, a park, and a bridge in the background.<|endoftext|>
+The teacher gave the students a test on the first day of school. The test was hard and the students were nervous.
+<|endoftext|>
+The teacher gave the students a choice between two books to read for their assignment. The students had to choose one of them.
+<|endoftext|>
+The teacher gave the students a choice between two topics
+Saving Checkpoint
+Iteration 6000/100000, Loss: 3.6327407360076904
+Image: http://images.cocodataset.org/train2017/000000500405.jpg
+Question: What is the color of the ocean waters in the image? [QA]
+Answer:   The color of the ocean waters in the image is blue.<|endoftext|>
+Model Predicted Ans: The ocean waters in the image are blue.<|endoftext|>
+The teacher gave the students a test on the first day of school. The test was hard and the students were nervous.
+<|endoftext|>
+The teacher gave the students a low grade because their essay was inadequate and full of errors.
+<|endoftext|>
+The teacher gave the students a low grade because their essay was inadequate and lacked evidence.
+<|endoftext|>
+The teacher gave the students a low grade because their essay was inadequate and full of plagiarism.
+<|endoftext|>
+Saving Checkpoint
+Iteration 6100/100000, Loss: 3.5700831413269043
+Image: http://images.cocodataset.org/train2017/000000326229.jpg
+Question: What is the person doing in the image while walking down the sidewalk? [QA]
+Answer:   The person is walking down the sidewalk while talking on their cell phone.<|endoftext|>
+Model Predicted Ans: The woman is walking down the sidewalk, possibly on her way to work or running errands.<|endoftext|>Illustration:
+Samantha and John are both trying to improve their health by taking vitamins. Samantha is a vegetarian and is concerned about getting enough iron in her diet, while John is a bodybuilder and wants to make sure he is getting enough protein. Samantha takes a multivitamin that contains iron, while John takes a protein powder that is fortified with vitamins and minerals.
+
+
+Saving Checkpoint
+Iteration 6200/100000, Loss: 3.5293681621551514
+Image: http://images.cocodataset.org/train2017/000000273665.jpg
+Question: Is the man wearing any particular accessory on his face? [QA]
+Answer:   Yes, the man is wearing sunglasses.<|endoftext|>
+Model Predicted Ans: Yes, the man is wearing a helmet on his head.<|endoftext|>Illustration:
+Samantha and John are both trying to improve their health and fitness. Samantha decides to go for a run in the park, while John decides to stay home and watch TV. After her run, Samantha feels energized and happy, while John feels sluggish and unmotivated.
+
+Q&A:
+1. Why did Samantha go for a run in the park?
+Answer: Samantha went for
+Saving Checkpoint
+Epoch 2 completed.
+Iteration 6300/100000, Loss: 3.7388768196105957
+Image: http://images.cocodataset.org/train2017/000000111750.jpg
+Question: Can you describe the laptop's appearance? [QA]
+Answer:   The laptop is black in color and is sitting open on the wooden desk.<|endoftext|>
+Model Predicted Ans: The laptop is a black, silver, and white color, with a black keyboard and a white screen.<|endoftext|>
+
+## ACHIEVING BALANCE IN BUSINESS
+
+In the world of business, achieving balance is key to success. Whether it's balancing the needs of employees and customers, or balancing the books, finding equilibrium is essential for long-term growth and sustainability. However, achieving balance is not always easy, and requires a combination of social interactions, common sense reasoning, and
+Saving Checkpoint
+Iteration 6400/100000, Loss: 3.5224697589874268
+Image: http://images.cocodataset.org/train2017/000000074959.jpg
+Question: What type of food is on the plate that the woman is holding? [QA]
+Answer:   The image does not provide enough detail to determine the specific type of food on the plate that the woman is holding.<|endoftext|>
+Model Predicted Ans: The woman is holding a plate of food, which is a slice of pizza.<|endoftext|>Illustration:
+Samantha and John are both in the same English class and have been assigned a research paper on the effects of social media on mental health. Samantha spends several hours researching and taking notes, while John decides to just copy and paste information from various sources without citing them. When they turn in their papers, Samantha receives an A while John receives a failing grade.
+
+Q&A
+Saving Checkpoint
+Iteration 6500/100000, Loss: 3.656191349029541
+Image: http://images.cocodataset.org/train2017/000000449721.jpg
+Question: What color is the truck with huge wheels in the image? [QA]
+Answer:   The truck with huge wheels in the image is neon green.<|endoftext|>
+Model Predicted Ans: The truck with the huge wheels is red.<|endoftext|>Illustration:
+Samantha and John are both in the same English class and have been assigned a research paper on the effects of social media on mental health. Samantha decides to use a variety of sources, including academic journals, news articles, and personal interviews, to support her argument. John, on the other hand, only uses sources that align with his personal beliefs and opinions. When they turn in their papers, Samantha receives an A while
+Saving Checkpoint
+Iteration 6600/100000, Loss: 3.720842123031616
+Image: http://images.cocodataset.org/train2017/000000028184.jpg
+Question: What is the condition of the field where the person is flying the kite? [QA]
+Answer:   The field where the person is flying the kite is green and appears to have tall grass.<|endoftext|>
+Model Predicted Ans: The field where the person is flying the kite is dry and the grass is green.<|endoftext|>
+The teacher gave the students a pop quiz, which was a surprise for them.
+<|endoftext|>
+The teacher gave the students a pop quiz, which was a surprise for them.
+<|endoftext|>
+The teacher gave the students a pop quiz, which was a surprise for them.
+<|endoftext|>
+The teacher gave the students a pop quiz, which was a surprise for them.
+<|endoftext|>
+The teacher gave the
+Saving Checkpoint
+Iteration 6700/100000, Loss: 3.5535640716552734
+Image: http://images.cocodataset.org/train2017/000000159375.jpg
+Question: What is the person doing in the image? [QA]
+Answer:   The person in the image is skiing down a snow-covered slope at high speed.<|endoftext|>
+Model Predicted Ans: The person is skiing down a slope, which is a snowy mountain.<|endoftext|>
+The teacher gave the students a test on the first day of school. The test was hard and the students struggled to finish it.
+<|endoftext|>
+The teacher gave the students a pop quiz, because she wanted to test their knowledge.
+<|endoftext|>
+The teacher gave the students a pop quiz, because she wanted to surprise them.
+<|endoftext|>
+The teacher gave the students a pop quiz, because she wanted to test their knowledge
+Saving Checkpoint
+Iteration 6800/100000, Loss: 3.6313319206237793
+Image: http://images.cocodataset.org/train2017/000000074883.jpg
+Question: How many cats and what colors are they? [QA]
+Answer:   There are two cats in the image - one black cat and one white cat, both sitting in the green grass.<|endoftext|>
+Model Predicted Ans: There are two cats in the image, and they are both white.<|endoftext|>
+
+
+The topic of the story is about a group of friends who are discussing their favorite books and the impact they have had on their lives.
+
+Person1: I recently read a book called "The Great Gatsby" by F. Scott Fitzgerald. It's a classic novel that explores themes of love, wealth, and the American Dream.
+Person2: Oh, I've heard of
+Saving Checkpoint
+Iteration 6900/100000, Loss: 3.461480140686035
+Image: http://images.cocodataset.org/train2017/000000157036.jpg
+Question: What are the sheep doing in the image? [QA]
+Answer:   The sheep are grazing, which means they are feeding on the grass in the field.<|endoftext|>
+Model Predicted Ans: The sheep are grazing in a field, eating grass.<|endoftext|>Illustration:
+Samantha and John are both trying to lose weight. Samantha has a supportive partner who encourages her to exercise and eat healthy, while John's partner is constantly tempting him with junk food and discouraging him from exercising. Samantha also has a group of friends who join her for walks and healthy meals, while John's friends often invite him to go out for fast food and drinks. As a result, Samantha is able to
+Saving Checkpoint
+Iteration 7000/100000, Loss: 3.4088711738586426
+Image: http://images.cocodataset.org/train2017/000000491579.jpg
+Question: What color is the toaster in the image? [QA]
+Answer:   The toaster in the image is silver.<|endoftext|>
+Model Predicted Ans: The toaster in the image is white.<|endoftext|>
+
+## HARNESSING THE POWER OF TECHNOLOGY
+
+Technology has become an integral part of our daily lives, from the smartphones we carry in our pockets to the smart homes we live in. It has revolutionized the way we communicate, work, and interact with the world around us. However, with great power comes great responsibility, and it is important to harness the power of technology in a way that benefits society as a whole.
+
+Saving Checkpoint
