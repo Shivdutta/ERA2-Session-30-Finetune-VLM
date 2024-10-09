@@ -212,7 +212,7 @@
     Refer to S30-output.log
 -   ![image-1](Data/S30--train_loss.png)
 
-### Huggingface Gradio Apps:
+### Huggingface Gradio Apps(Application is running slow becuae of non availability of GPU):
 
     -    The app.py script is a multimodal AI application that integrates image, audio, and text inputs using pre-trained models like CLIP (for vision tasks), Phi-2 (for text generation), and WhisperX (for audio transcription). The script sets up tokenizers and processors for handling inputs and defines a custom residual block (SimpleResBlock) to transform embeddings for more stable learning. After loading pretrained and fine-tuned weights for both the projection and residual layers, it implements the model_generate_ans function, which processes inputs from different modalities, combines their embeddings, and generates responses sequentially. This model handles tasks like image embedding extraction, audio transcription and embedding, and text tokenization to predict responses. The app features a Gradio interface where users can upload images, record or upload audio, and submit text queries, receiving multimodal answers through a web interface. This interactive application is designed for seamless, multi-input AI tasks using advanced model architectures.
 
