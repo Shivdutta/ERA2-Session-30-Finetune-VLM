@@ -138,7 +138,7 @@
     - **The model output and ground truth are matching **
 
     -   Pre Training loss:
-    -   ![image-1](S30--pretrain_loss.png)
+    -   ![image-1](Data/S30--pretrain_loss.png)
 
 ### Stage 2: Fine-training S29_finetunning.ipynb :
 
@@ -207,12 +207,14 @@
     Epoch 3:  21%|██        | 653/3125 [42:37<4:37:16,  6.73s/it]
     Epoch 3:  21%|██        | 654/3125 [42:38<3:22:17,  4.91s/it]
     ```
-    - **The model output and ground truth are matching **
-    -   Training loss:
-        Refer to S30-output.log
-    -   ![image-1](S30--train_loss.png)
+- **The model output and ground truth are matching **
+-   Training loss:
+    Refer to S30-output.log
+-   ![image-1](Data/S30--train_loss.png)
 
 ### Huggingface Gradio Apps:
+
+    -    The app.py script is a multimodal AI application that integrates image, audio, and text inputs using pre-trained models like CLIP (for vision tasks), Phi-2 (for text generation), and WhisperX (for audio transcription). The script sets up tokenizers and processors for handling inputs and defines a custom residual block (SimpleResBlock) to transform embeddings for more stable learning. After loading pretrained and fine-tuned weights for both the projection and residual layers, it implements the model_generate_ans function, which processes inputs from different modalities, combines their embeddings, and generates responses sequentially. This model handles tasks like image embedding extraction, audio transcription and embedding, and text tokenization to predict responses. The app features a Gradio interface where users can upload images, record or upload audio, and submit text queries, receiving multimodal answers through a web interface. This interactive application is designed for seamless, multi-input AI tasks using advanced model architectures.
 
 https://huggingface.co/spaces/Shivdutta/S30-MultiModalGPT
 
@@ -221,5 +223,10 @@ https://huggingface.co/spaces/Shivdutta/S30-MultiModalGPT
 ![output-2](Data/output_2.png)
 
 ![output-3](Data/output_3.png)
+
+### Improvements:
+-   Increasing Training time for improving model performance
+-   Hyper parameter tuning
+-   Using Phi3 inplace of phi2 for increasing overall perforamce 
 
 Thank you 🙏
